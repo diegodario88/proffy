@@ -1,0 +1,29 @@
+version: "3"
+services:
+  api:
+    image: node:14.3-slim
+    container_name: "proffy-api"
+    ports:
+      - "1337:3000"
+    working_dir: "/home/node/app"
+    volumes:
+      - ./server:/home/node/app
+    command:
+      - sh
+      - -c
+      - |
+        npm install
+        npm start
+    networks:
+      - backend
+  # redis:
+  #   image: redis:6.0-alpine
+  #   container_name: "proffy-redis"
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - backend
+
+networks:
+  backend:
+    driver: "bridge"
